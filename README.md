@@ -1,15 +1,25 @@
 # connect-to-context
 React: Context -> Props
 
-Example for requiredContextFields:
-    1. "propertyName"
-    2. ["propertyName1", "propertyName2", "propertyName3"]
-*/
+## Example 
+```javascript
+const Test1 = connectToContext('primaryId')(TestRaw);
 
-/*
-    Example for mapContextToProps (optional):
-    1. (context) => ({
-        identityFieldName : 'primaryId',
-        experimentInputs  : {primaryId : context.primaryId}
-    })
-    2. undefined
+const Test2 = connectToContext(['primaryId', 'testId'])(TestRaw);
+
+const Test3 = connectToContext('primaryId', (context) => ({
+    identityFieldName : 'primaryId',
+    experimentInputs  : {primaryId : context.primaryId}
+}))(TestRaw);
+
+ReactDOMServer.renderToStaticMarkup(
+    <Provider primaryId = {primaryId} testId = {testId}>
+        <div>
+            <Test1/>
+            <Test2/>
+            <Test3/>
+        </div>
+    </Provider>
+)
+```
+
