@@ -12,13 +12,33 @@ const Test3 = connectToContext('primaryId', (context) => ({
     experimentInputs  : {primaryId : context.primaryId}
 }))(TestRaw);
 
+class Provider extends React.Component {
+    static childContextTypes = {
+        primaryId: React.PropTypes.any,
+        testId: React.PropTypes.any,
+    };
+
+    getChildContext() {
+        return {
+            primaryId: this.props.primaryId,
+            testId: this.props.testId,
+        }
+    }
+
+    render() {
+        return (
+            <div>
+                {this.props.children}
+            </div>
+        );
+    }
+}
+
 ReactDOMServer.renderToStaticMarkup(
     <Provider primaryId = {primaryId} testId = {testId}>
-        <div>
-            <Test1/>
-            <Test2/>
-            <Test3/>
-        </div>
+        <Test1/>
+        <Test2/>
+        <Test3/>
     </Provider>
 )
 ```
