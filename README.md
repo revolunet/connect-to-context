@@ -3,6 +3,9 @@ React: Context -> Props
 
 ## Example 
 ```javascript
+
+import { connectToContext } from 'connect-to-context';
+
 const Test1 = connectToContext('primaryId')(TestRaw);
 
 const Test2 = connectToContext(['primaryId', 'testId'])(TestRaw);
